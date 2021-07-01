@@ -149,10 +149,10 @@ if (isunix)
         disp('Linux Path on robz notebook is used');
     end
 elseif (ispc)
-    path(path,'C:\Robert\Master\Daten\LookUpTables\ArielleLacros\')
-    lookup_table_path='C:\Robert\Master\Daten\LookUpTables\ArielleLacros\';
-    result_path='C:\Robert\Master\Software\ND-Filter\results\arielle\';
-    data_path='C:\Robert\Master\Daten\Arielle\mosaic\';
+    path(path,'C:\Users\Wiesen\Programmierwiesen\Software\dualFOVdepol\LookUpTables\ArielleLacros\')
+    lookup_table_path='C:\Users\Wiesen\Programmierwiesen\Software\dualFOVdepol\LookUpTables\ArielleLacros\';
+    result_path='C:\Users\Wiesen\Programmierwiesen\results\dualFOVdepol';
+    data_path='C:\Users\Wiesen\Programmierwiesen\Daten\Arielle\mosaic\';
     
     
     disp('Windows Path is used');

@@ -53,7 +53,7 @@ fprintf(logfile,'\n%s ::: Loop %d ::: Processing %s ------------\n',datestr(now,
 
 % Get data from NetCDF--
 fprintf('Loading NetCDF file ... ');
-tic;
+
 ncid = netcdf.open(fullfile(data_path, InputFiles_lidar{ff}), 'NC_WRITE');
 [ndims,nvars,ngatts,unlimdimid] = netcdf.inq(ncid);                     %net cdf wird eingelesen
 for i=0:nvars-1
@@ -67,12 +67,6 @@ netcdf.close(ncid);
 clear data;
 fprintf(' ... done. (If that took too long, check your Ram. If its allready full this wont work....) ');
 
-if toc>20
-    fprintf(' That took quite long, check your Ram. Your machine might not be good enough for what is still coming.... ');
-end
-
-
-%
 % For Lacros set deadtime Polynomial manuell
 if lacros_or_arielle==1
     deadtime_polynomial(13,:)=deadtime_polynomial_lacros;               %for new channel of lacros since data is missing in netcdf, daher manuell
@@ -282,19 +276,13 @@ time_rof_calibration    =   find(depol_cal_angle>depol_cal_angle_threshold);    
 
 signal_during_calibration = signal(:,:,time_rof_calibration);
 
-disp('Arielle 13.11. manuell unvollständige filter drehungen rausgeworfen  ')
+disp('Arielle 13.11. manuell unvollständige filter drehungen rausgeworfen  Arielle fuer 13.-14.11. ')
 s1=signal_during_calibration(:,:,1:20);
+s2=signal_during_calibration(:,:,23:42);
 clear signal_during_calibration
 signal_during_calibration(:,:,1:20)=s1;
-clear s1
-
-% disp('Arielle 13.11. manuell unvollständige filter drehungen rausgeworfen  Arielle fuer 13.-14.11. ')
-% s1=signal_during_calibration(:,:,1:20);
-% s2=signal_during_calibration(:,:,23:42);
-% clear signal_during_calibration
-% signal_during_calibration(:,:,1:20)=s1;
-% signal_during_calibration(:,:,21:40)=s2;
-% clear s1 s2
+signal_during_calibration(:,:,21:40)=s2;
+clear s1 s2
 
 
 % disp('Dushanbe 16.9. manuell unvollständige filter drehungen rausgeworfen  ')
@@ -639,7 +627,7 @@ alpha_per_km= alpha.*1000;      % increases z^(2/3) with height
 r_eff_in_microns= r_eff;        % increases z^(1/3) with height
 lwc_in_g_per_cubicmeter = lwc;  % increases linearly with height
 lwc_dualFOV=lwc;
-%
+%%
 % alpha_per_km_mean = mean(alpha_per_km,2,'omitnan');   % nanmean(matrix,dim,inludeNaN)
 % alpha_per_km_std_err  = std(alpha_per_km,0,2,'omitnan') / sqrt(sum(~isnan(alpha_per_km(end,:)))) ;   % nanmean(matrix,normalization,dim,inludeNaN)
 % fprintf('mean ( alpha_ref ) = %.2f  +- %.2f   per km\n',alpha_per_km_mean(end), alpha_per_km_std_err(end));

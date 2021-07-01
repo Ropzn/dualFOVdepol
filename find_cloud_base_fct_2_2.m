@@ -17,7 +17,8 @@
 
 
 
-function [cloudbase_L,time_rof_found_cloudbases_L] = find_liquid_water_phase_1_0 (signal_L,height_rof_cloudsearch_L,...
+function [cloudbase_L,time_rof_found_cloudbases_L] = find_cloud_base_fct_2_2 (signal_L,height_rof_cloudsearch_L,...
+                                                                                    artifical_CB_height_if_no_CB_was_found,...
                                                                                     inputfile_L,logfile_L)
 
 ss_L = 0;                                                                   % counter for cloud bases found. If it stays 0 no cloud base was found.
